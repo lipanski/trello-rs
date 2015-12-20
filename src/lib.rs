@@ -1,10 +1,10 @@
 extern crate rustc_serialize;
 extern crate hyper;
 
+pub mod client;
 pub mod board;
 pub mod list;
 pub mod card;
-pub mod client;
 
 pub type Board = board::Board;
 pub type List = list::List;
