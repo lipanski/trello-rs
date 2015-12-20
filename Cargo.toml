@@ -1,7 +1,10 @@
 [package]
 name = "trello"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Florin Lipan <florinlipan@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/lipanski/trello-rs"
+description = "A Trello client for Rust"
 
 [dependencies]
 hyper = "0.7.0"
