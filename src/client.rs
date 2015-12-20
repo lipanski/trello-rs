@@ -5,7 +5,7 @@ use hyper::status::StatusCode;
 use rustc_serialize::json;
 use rustc_serialize::{Decodable, Encodable};
 
-use trello::Error;
+use Error;
 
 use std::io::Read;
 use std::string::ToString;

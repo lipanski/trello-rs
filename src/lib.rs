@@ -1,3 +1,6 @@
+extern crate rustc_serialize;
+extern crate hyper;
+
 pub mod board;
 pub mod list;
 pub mod card;

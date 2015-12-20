@@ -1,5 +1,5 @@
-use trello::client;
-use trello::Error;
+use client;
+use Error;
 
 #[derive(RustcDecodable, RustcEncodable)]
 pub struct Board {
