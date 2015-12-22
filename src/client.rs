@@ -52,6 +52,28 @@ pub fn post<E: Encodable, D: Decodable>(path: &str, obj: E, app_key: &str, token
     handle_response(&mut res)
 }
 
+pub fn delete(path: &str, app_key: &str, token: &str) -> Result<(), Error> {
+    let url  = url_from_path(&path, &app_key, &token);
+
+    let client  = Client::new();
+    let mut res = client.delete(&url)
+        .header(Connection::close())
+        .header(ContentType::json())
+        .send()
+        .unwrap();
+
+    let mut body = String::new();
+    res.read_to_string(&mut body).unwrap();
+
+    match res.status {
+        StatusCode::Ok | StatusCode::Created => Ok(()),
+        StatusCode::Unauthorized             => Err(Error::Unauthorized),
+        StatusCode::TooManyRequests          => Err(Error::TooManyRequests),
+        StatusCode::BadRequest               => Err(Error::InvalidRequest(body)),
+        _                                    => Err(Error::Unknown(body))
+    }
+}
+
 fn url_from_path(path: &str, app_key: &str, token: &str) -> String {
     let mut url = BASE_URL.to_string() + path;
     url = url + "?key=" + app_key;

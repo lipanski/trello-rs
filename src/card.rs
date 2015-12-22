@@ -2,6 +2,7 @@ use client;
 use Error;
 
 #[derive(RustcDecodable, RustcEncodable)]
+#[allow(non_snake_case)]
 pub struct Card {
     pub id: Option<String>,
     pub idList: String,
@@ -29,5 +30,11 @@ impl Card {
         };
 
         client::post("/cards", card, app_key, token)
+    }
+
+    pub fn delete(app_key: &str, token: &str, card_id: &str) -> Result<(), Error> {
+        let path = ["cards", card_id].join("/");
+
+        client::delete(&path, app_key, token)
     }
 }
