@@ -11,6 +11,7 @@ use std::io::Read;
 use std::string::ToString;
 use std::error::Error as StdError;
 
+pub const APP_KEY_URL: &'static str = "https://trello.com/app-key";
 const BASE_URL: &'static str = "https://api.trello.com/1/";
 const DEFAULT_SCOPE: &'static str = "read,write,account";
 const DEFAULT_EXPIRATION: &'static str = "30days";
