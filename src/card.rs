@@ -1,4 +1,4 @@
-use client;
+use Client;
 use Error;
 
 #[derive(RustcDecodable, RustcEncodable)]
@@ -13,13 +13,13 @@ pub struct Card {
 }
 
 impl Card {
-    pub fn list(app_key: &str, token: &str, list_id: &str) -> Result<Vec<Self>, Error> {
+    pub fn list(client: &Client, list_id: &str) -> Result<Vec<Self>, Error> {
         let path = ["lists", list_id, "cards"].join("/");
 
-        client::get(&path, app_key, token)
+        client.get(&path)
     }
 
-    pub fn create(app_key: &str, token: &str, list_id: &str, name: &str) -> Result<Self, Error> {
+    pub fn create(client: &Client, list_id: &str, name: &str) -> Result<Self, Error> {
         let card = Card {
             id: None,
             idList: list_id.to_string(),
@@ -29,12 +29,12 @@ impl Card {
             url: None
         };
 
-        client::post("/cards", card, app_key, token)
+        client.post("/cards", card)
     }
 
-    pub fn delete(app_key: &str, token: &str, card_id: &str) -> Result<(), Error> {
+    pub fn delete(client: &Client, card_id: &str) -> Result<(), Error> {
         let path = ["cards", card_id].join("/");
 
-        client::delete(&path, app_key, token)
+        client.delete(&path)
     }
 }

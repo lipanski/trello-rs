@@ -6,6 +6,7 @@ pub mod board;
 pub mod list;
 pub mod card;
 
+pub type Client = client::Client;
 pub type Board = board::Board;
 pub type List = list::List;
 pub type Card = card::Card;

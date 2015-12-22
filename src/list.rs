@@ -1,4 +1,4 @@
-use client;
+use Client;
 use Error;
 
 #[derive(RustcDecodable, RustcEncodable)]
@@ -8,9 +8,9 @@ pub struct List {
 }
 
 impl List {
-    pub fn list(app_key: &str, token: &str, board_id: &str) -> Result<Vec<Self>, Error> {
+    pub fn list(client: &Client, board_id: &str) -> Result<Vec<Self>, Error> {
         let path = ["boards", board_id, "lists"].join("/");
 
-        client::get(&path, app_key, token)
+        client.get(&path)
     }
 }

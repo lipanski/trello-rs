@@ -1,4 +1,4 @@
-use client;
+use Client;
 use Error;
 
 #[derive(RustcDecodable, RustcEncodable)]
@@ -12,7 +12,7 @@ pub struct Board {
 }
 
 impl Board {
-    pub fn list(app_key: &str, token: &str) -> Result<Vec<Self>, Error> {
-        client::get("members/me/boards", app_key, token)
+    pub fn list(client: &Client) -> Result<Vec<Self>, Error> {
+        client.get("members/me/boards")
     }
 }
