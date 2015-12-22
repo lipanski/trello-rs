@@ -4,7 +4,7 @@ version = "0.1.2"
 authors = ["Florin Lipan <florinlipan@gmail.com>"]
 license = "MIT"
 repository = "https://github.com/lipanski/trello-rs"
-description = "A Trello client for Rust"
+description = "A Trello client for Rust. This is a work in progress!"
 
 [dependencies]
 hyper = "0.7.0"
