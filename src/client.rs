@@ -9,7 +9,6 @@ use Error;
 
 use std::io::Read;
 use std::string::ToString;
-use std::error::Error as StdError;
 
 pub const APP_KEY_URL: &'static str = "https://trello.com/app-key";
 const BASE_URL: &'static str = "https://api.trello.com/1/";
@@ -112,7 +111,7 @@ impl Client {
     fn handle_json_response<D: Decodable>(body: &str) -> Result<D, Error> {
         match json::decode(body) {
             Ok(decodable)      => Ok(decodable),
-            Err(decoder_error) => Err(Error::Json(decoder_error.description().to_string()))
+            Err(_)             => Err(Error::Json(body.to_string()))
         }
     }
 }
