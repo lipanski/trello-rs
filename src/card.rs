@@ -19,6 +19,12 @@ impl Card {
         client.get(&path)
     }
 
+    pub fn find(client: &Client, card_id: &str) -> Result<Self, Error> {
+        let path = ["cards", card_id].join("/");
+
+        client.get(&path)
+    }
+
     pub fn create(client: &Client, list_id: &str, name: &str) -> Result<Self, Error> {
         let card = Card {
             id: None,

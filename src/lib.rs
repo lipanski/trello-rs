@@ -12,6 +12,7 @@ pub type List = list::List;
 pub type Card = card::Card;
 
 pub enum Error {
+    NotFound,
     Unauthorized,
     TooManyRequests,
     InvalidRequest(String),

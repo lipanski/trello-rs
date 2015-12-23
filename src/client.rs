@@ -83,6 +83,7 @@ impl Client {
             StatusCode::Unauthorized             => Err(Error::Unauthorized),
             StatusCode::TooManyRequests          => Err(Error::TooManyRequests),
             StatusCode::BadRequest               => Err(Error::InvalidRequest(body)),
+            StatusCode::NotFound                 => Err(Error::NotFound),
             _                                    => Err(Error::Unknown(body))
         }
     }
@@ -104,6 +105,7 @@ impl Client {
             StatusCode::Unauthorized             => Err(Error::Unauthorized),
             StatusCode::TooManyRequests          => Err(Error::TooManyRequests),
             StatusCode::BadRequest               => Err(Error::InvalidRequest(body)),
+            StatusCode::NotFound                 => Err(Error::NotFound),
             _                                    => Err(Error::Unknown(body))
         }
     }
