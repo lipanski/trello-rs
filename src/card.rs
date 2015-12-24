@@ -8,7 +8,7 @@ pub struct Card {
     pub idList: String,
     pub name: String,
     pub desc: Option<String>,
-    pub pos: Option<u64>,
+    pub pos: Option<f32>,
     pub url: Option<String>
 }
 
