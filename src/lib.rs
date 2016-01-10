@@ -1,5 +1,6 @@
 extern crate rustc_serialize;
 extern crate hyper;
+extern crate mockito;
 
 pub mod client;
 pub mod board;
@@ -13,6 +14,7 @@ pub type List = list::List;
 pub type Card = card::Card;
 pub type Label = label::Label;
 
+#[derive(PartialEq, Debug)]
 pub enum Error {
     NotFound,
     Unauthorized,

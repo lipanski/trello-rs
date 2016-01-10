@@ -4,6 +4,7 @@ use hyper::client::response::Response;
 use hyper::status::StatusCode;
 use rustc_serialize::json;
 use rustc_serialize::{Decodable, Encodable};
+use mockito::url::Url;
 
 use Error;
 
@@ -42,7 +43,7 @@ impl Client {
         let url = self.url_from_path(&path);
 
         let client = HttpClient::new();
-        let mut res = client.get(&url)
+        let mut res = client.get(Url(&url))
             .header(Connection::close())
             .send()
             .unwrap();

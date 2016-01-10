@@ -9,3 +9,11 @@ description = "A Trello client for Rust. This is a work in progress!"
 [dependencies]
 hyper = "0.7.0"
 rustc-serialize = "0.3.16"
+
+[dependencies.mockito]
+version = "0.1.3"
+features = ["use_hyper"]
+
+[dev-dependencies.mockito]
+version = "0.1.3"
+features = ["mock_hyper"]
