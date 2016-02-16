@@ -19,22 +19,26 @@ impl Board {
 
 #[cfg(test)]
 mod tests {
-    use mockito::{self, server};
+    use mockito;
     use Client;
     use Board;
     use Error;
 
     #[test]
-    fn test_something() {
-        server::instance();
-
-        mockito::mock("GET", "/1/members/me/boards?key=app_key&token=token").respond_with("HTTP/1.1 200 OK\n\nHello world");
+    fn test_boards() {
+        mockito::mock("GET", "/1/members/me/boards?key=app_key&token=token").respond_with_file("tests/mocks/list_boards.http");
 
         let client = Client::new("app_key".to_string(), "token".to_string());
-        let boards = Board::list(&client);
 
-        assert!(boards.is_err());
-        assert_eq!(boards.err().unwrap(), Error::Json("Hello world".to_string()));
+        let boards_result = Board::list(&client);
+        assert!(boards_result.is_ok());
+
+        let boards = boards_result.unwrap();
+        assert_eq!(1, boards.len());
+
+        let board = boards.get(0).unwrap();
+        assert_eq!("trello", board.name);
+        assert_eq!("123456789abcdefghijklmno", board.id);
 
         mockito::reset();
     }
