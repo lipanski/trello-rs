@@ -1,7 +1,7 @@
 use Client;
 use Error;
 
-#[derive(RustcDecodable, RustcEncodable)]
+#[derive(RustcDecodable, RustcEncodable, Debug)]
 #[allow(non_snake_case)]
 pub struct Card {
     pub id: Option<String>,

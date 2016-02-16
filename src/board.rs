@@ -1,7 +1,7 @@
 use Client;
 use Error;
 
-#[derive(RustcDecodable, RustcEncodable)]
+#[derive(RustcDecodable, RustcEncodable, Debug)]
 pub struct Board {
     pub id: String,
     pub name: String,
