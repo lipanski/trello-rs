@@ -17,7 +17,7 @@ impl Board {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "mocks"))]
 mod tests {
     use mockito;
     use Client;
