@@ -4,7 +4,9 @@ use hyper::client::response::Response;
 use hyper::status::StatusCode;
 use rustc_serialize::json;
 use rustc_serialize::{Decodable, Encodable};
-use mockito::url::Url;
+
+#[cfg(test)]
+use mockito;
 
 use Error;
 
@@ -12,7 +14,13 @@ use std::io::Read;
 use std::string::ToString;
 
 pub const APP_KEY_URL: &'static str = "https://trello.com/app-key";
-const BASE_URL: &'static str = "https://api.trello.com/1/";
+
+#[cfg(not(test))]
+const BASE_URL: &'static str = "https://api.trello.com";
+
+#[cfg(test)]
+const BASE_URL: &'static str = mockito::SERVER_URL;
+
 const DEFAULT_SCOPE: &'static str = "read,write,account";
 const DEFAULT_EXPIRATION: &'static str = "30days";
 
@@ -30,7 +38,7 @@ impl Client {
     }
 
     pub fn authorize_url(app_name: &str, app_key: &str, scope: Option<&str>, expiration: Option<&str>) -> String {
-        let mut url = BASE_URL.to_string() + "authorize?response_type=token";
+        let mut url = BASE_URL.to_string() + "/1/authorize?response_type=token";
         url = url + "&name=" + app_name;
         url = url + "&key=" + app_key;
         url = url + "&scope=" + scope.unwrap_or(DEFAULT_SCOPE);
@@ -43,7 +51,7 @@ impl Client {
         let url = self.url_from_path(&path);
 
         let client = HttpClient::new();
-        let mut res = client.get(Url(&url))
+        let mut res = client.get(&url)
             .header(Connection::close())
             .send()
             .unwrap();
@@ -90,7 +98,7 @@ impl Client {
     }
 
     fn url_from_path(&self, path: &str) -> String {
-        let mut url = BASE_URL.to_string() + path;
+        let mut url = BASE_URL.to_string() + "/1/" + path;
         url = url + "?key=" + &self.app_key;
         url = url + "&token=" + &self.token;
 

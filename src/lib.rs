@@ -1,5 +1,6 @@
 extern crate rustc_serialize;
 extern crate hyper;
+#[cfg(test)]
 extern crate mockito;
 
 pub mod client;
